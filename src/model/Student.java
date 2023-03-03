@@ -67,7 +67,7 @@ public class Student {
 	//old personCode [0-9]{6}[-][0-9]{5}
 	//new personCode 32{1}[0-9]{9}
 	public void setPersonCode(String inputPersonCode) {
-		if(inputPersonCode!=null && personCode.matches("[0-9]{6}[-][0-9]{5}"))
+		if(inputPersonCode!=null && inputPersonCode.matches("[0-9]{6}[-][0-9]{5}"))
 		{
 			personCode = inputPersonCode;
 		}
@@ -109,16 +109,16 @@ public class Student {
 
 	
 	//Student [id=0, name=Jānis, surname=Bērziņš utt
-	@Override
+/*	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", surname=" + surname + ", faculty=" + faculty
 				+ ", personCode=" + personCode + "]";
 	}
-	
+	*/
 	//4. toString
 	//0: Jānis Bērziņš, 121290-12345, ITF
-	/*public String toString() {
+	public String toString() {
 		return "" + id + ": " + name + " " + surname + ", " + personCode + ", " +faculty;
-	}*/
+	}
 	//5. additional functions
 }
