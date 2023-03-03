@@ -86,11 +86,26 @@ public class Student {
 			faculty = Faculty.other;
 		}
 	}
-	
 
-	
-	
 	//3. constructors
+	//no-args constructor
+	public Student()
+	{
+		setId();
+		setName("Unknown");
+		setSurname("Unknown");
+		setFaculty(Faculty.other);
+		setPersonCode("000000-00000");
+	}
+	
+	//args constructor
+	public Student(String name, String surname, Faculty faculty, String personCode ) {
+		setId();
+		setName(name);
+		setSurname(surname);
+		setFaculty(faculty);
+		setPersonCode(personCode);
+	}
 	
 	//4. toString
 	
