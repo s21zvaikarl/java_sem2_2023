@@ -106,8 +106,19 @@ public class Student {
 		setFaculty(faculty);
 		setPersonCode(personCode);
 	}
+
+	
+	//Student [id=0, name=Jānis, surname=Bērziņš utt
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", surname=" + surname + ", faculty=" + faculty
+				+ ", personCode=" + personCode + "]";
+	}
 	
 	//4. toString
-	
+	//0: Jānis Bērziņš, 121290-12345, ITF
+	/*public String toString() {
+		return "" + id + ": " + name + " " + surname + ", " + personCode + ", " +faculty;
+	}*/
 	//5. additional functions
 }
