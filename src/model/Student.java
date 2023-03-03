@@ -8,6 +8,8 @@ public class Student {
 	private Faculty faculty;
 	private String personCode;
 	
+	private static long studentCounter = 0;
+	
 	//2. getters and setters
 	public long getId() {
 		return id;
@@ -28,12 +30,19 @@ public class Student {
 	public String getPersonCode() {
 		return personCode;
 	}
+	
+	
+	public void setId() {
+		id = studentCounter;
+		studentCounter++;
+	}
+	
 	//TODO take a look to https://regex101.com/
 	//[A-Z]{1}[a-z]+
 	//[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+[ ]?([A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?
 	//setname("sjkdhskfx78923748372hsdjkc7s8f798sedf")
 	public void setName(String inputName) {
-		if(inputName.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([ ][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
+		if(inputName!=null && inputName.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([ ][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
 		{
 			name = inputName;
 		}
@@ -44,7 +53,7 @@ public class Student {
 	}
 
 	public void setSurname(String inputSurname) {
-		if(inputSurname.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([-][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
+		if(inputSurname!=null && inputSurname.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([-][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
 		{
 			surname = inputSurname;
 		}
@@ -58,7 +67,7 @@ public class Student {
 	//old personCode [0-9]{6}[-][0-9]{5}
 	//new personCode 32{1}[0-9]{9}
 	public void setPersonCode(String inputPersonCode) {
-		if(inputPersonCode.matches("[0-9]{6}[-][0-9]{5}"))
+		if(inputPersonCode!=null && personCode.matches("[0-9]{6}[-][0-9]{5}"))
 		{
 			personCode = inputPersonCode;
 		}
@@ -68,7 +77,15 @@ public class Student {
 		}
 	}
 	
-	
+	public void setFaculty(Faculty inputFaculty) {
+		if(inputFaculty!=null) {
+			faculty = inputFaculty;
+		}
+		else
+		{
+			faculty = Faculty.other;
+		}
+	}
 	
 
 	
