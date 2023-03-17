@@ -24,7 +24,7 @@ public class MainService {
 		
 		Student st1 = new Student();
 		Student st2 = new Student("Jānis", "Bērziņš", Faculty.ITF, "121200-12345");
-		Student st3 = new Student("Jā242nis", "Bē$%rziņš", Faculty.ITF, "121x00-12345");
+		Student st3 = new Student("Arlis", "Aigzne", Faculty.EPF, "121300-12345");
 		
 		Student[] allStudents = {st1, st2, st3};
 		for(Student temp : allStudents) {
@@ -83,6 +83,30 @@ public class MainService {
 		for(Course temp : allCourseList) {
 			System.out.println(temp.getTitle() + ": " + calculateAVGCourseGrade(temp));
 		}
+		
+		System.out.println("~~~~~~~~~~Vidējā~svērtā~kursa~atzīme~~~~~~~~~~~~~~");
+		
+		for(Student temp : allStudentsList) {
+			System.out.println(temp.getName() + ": " + calculateWeightedAVGGrade(temp));
+		}
+		
+		System.out.println("~~~~~~~~~~Kursu~Skaits~Pasniedzējam~~~~~~~~~~~~~~");
+		
+		for(Professor temp : allProfessorList) {
+			System.out.println(temp.getSurname() + ": " + calculateCourseCount(temp));
+		}
+		
+		System.out.println("~~~~~~~~~~Nesakartots~~~~~~~~~~~~~~");
+		
+		for(Student temp : allStudents) {
+			System.out.println(temp);
+		}
+		
+		System.out.println("~~~~~~~~~~Sakartots~~~~~~~~~~~~~~");
+		ArrayList<Student> sortedAllStudentsList = sortStudents();
+		for(Student temp : sortedAllStudentsList) {
+			System.out.println(temp);
+		}
 	}
 	
 	private static float calculateAVGGrade(Student student) {
@@ -120,5 +144,60 @@ public class MainService {
 			return 0;
 		}
 	}
+	
+	private static float calculateWeightedAVGGrade (Student student) {
+		if(student != null) {
+			float gradesSum = 0;
+			int creditPointsCounter = 0;
+			for(Grade temp : allGradeList) {
+				if(temp.getStudent().equals(student)) {
+					gradesSum+=(temp.getGrValue()*temp.getCourse().getCreditPoints());
+					creditPointsCounter+=temp.getCourse().getCreditPoints();
+					}
+				}
+			return gradesSum/creditPointsCounter;
+			}
+		else {
+			return 0.0f;
+		}
+	}
+	
+	private static int calculateCourseCount (Professor professor) {
+		if(professor!=null) {
+			int courseCounter = 0;
+			for(Course temp : allCourseList) {
+				if(temp.getProfessor().equals(professor)) {
+					courseCounter++;
+				}
+			}
+			return courseCounter;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	private static ArrayList<Student> sortStudents(){
+		ArrayList<Student> sortedStudents = new ArrayList<>();
+		for(Student temp : allStudentsList) {
+			sortedStudents.add(temp);
+		}
+		for(int i = 0; i < sortedStudents.size(); i++) {
+			for(int j = 0; j < sortedStudents.size(); j++) {
+				float student1AVGGrade = calculateAVGGrade(sortedStudents.get(i));
+				float student2AVGGrade = calculateAVGGrade(sortedStudents.get(j));
+				
+				if(student1AVGGrade > student2AVGGrade) {
+					Student temp = sortedStudents.get(i);
+					sortedStudents.set(i, sortedStudents.get(j));
+					sortedStudents.set(j, temp);
+				}
+			}
+		}
+			
+		return sortedStudents;
+ 	}
+	
+	
 
 }
