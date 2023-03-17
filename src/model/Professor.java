@@ -1,23 +1,16 @@
 package model;
 
-public class Professor {
+public class Professor extends Person {
 //1.variables
 	
 	private long id;
-	private String name;
-	private String surname;
 	private Degree degree;
 	private static long professorCounter = 10000;
 //2. getters and setters
 	public long getId() {
 		return id;
 	}
-	public String getName() {
-		return name;
-	}
-	public String getSurname() {
-		return surname;
-	}
+	
 	public Degree getDegree() {
 		return degree;
 	}
@@ -25,29 +18,6 @@ public class Professor {
 	public void setId() {
 		id = professorCounter;
 		professorCounter++;
-	}
-	
-	
-	public void setName(String inputName) {
-		if(inputName!=null && inputName.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([ ][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
-		{
-			name = inputName;
-		}
-		else
-		{
-			name = "Unknown";
-		}
-	}
-
-	public void setSurname(String inputSurname) {
-		if(inputSurname!=null && inputSurname.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+([-][A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+)?"))
-		{
-			surname = inputSurname;
-		}
-		else
-		{
-			surname = "Unknown";
-		}
 	}
 	
 	
@@ -64,21 +34,18 @@ public class Professor {
 //3. constructors
 	
 	public Professor() {
-
+		super();
 		setId();
-		setName("Unknown");
-		setSurname("Unknown");
 		setDegree(Degree.other);
 	}
-public Professor(String name, String surname, Degree degree) {
+public Professor(String name, String surname, String personCode, Degree degree) {
+	super(name, surname, personCode);
 	setId();
-	setName(name);
-	setSurname(surname);
 	setDegree(degree);
 }
 @Override
 public String toString() {
-	return "Professor [id=" + id + ", name=" + name + ", surname=" + surname + ", degree=" + degree + "]";
+	return "Professor [id=" + id + ", " + super.toString() + ", degree=" + degree + "]";
 }
 	
 	
